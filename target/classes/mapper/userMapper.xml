@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.hulian.mDao.IUserDao">
+    <resultMap type="cn.hulian.mEntity.User" id="userMap">
+        <id property="id" column="U_ID" javaType="java.lang.Integer"></id>
+        <result property="username" column="U_NAME" javaType="java.lang.String"></result>
+        <result property="password" column="U_PASSWORD" javaType="java.lang.String"></result>
+    </resultMap>
+    <insert id="insertUser" parameterType="cn.hulian.mEntity.User">
+        INSERT INTO T_USER(U_NAME,U_PASSWORD)VALUES(#{username},#{password})
+    </insert>
+     <select id="getUserByName" parameterType="java.lang.String" resultMap="userMap">
+        SELECT * FROM T_USER WHERE U_NAME=#{username}
+    </select>
+    <select id="queryAllUser" resultMap="userMap">
+        SELECT * FROM T_USER
+    </select>
+    <delete id="deleteUser" parameterType="Integer">
+        DELETE FROM T_USER WHERE U_ID=#{id}
+    </delete>
+</mapper>

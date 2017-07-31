@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.hulian.mDao.IRoomDao">
+    <resultMap type="cn.hulian.mEntity.Room" id="roomMap">
+        <id property="id" column="R_ID" javaType="java.lang.Integer"></id>
+        <result property="no" column="R_NO" javaType="java.lang.String" ></result>
+        <result property="type" column="R_TYPE" javaType="java.lang.String" ></result>
+        <result property="status" column="R_STATUS" javaType="java.lang.Integer" ></result>
+        <result property="pay" column="R_PAY" javaType="java.lang.Double" ></result>
+    </resultMap>
+    
+    <select id="queryAllRoomByStatus" resultMap="roomMap">
+        SELECT * FROM T_ROOM WHERE R_STATUS=0
+    </select>
+    <select id="queryAllRoom" resultMap="roomMap">
+        SELECT * FROM T_ROOM 
+    </select>
+    <select id="queryRoomByNo" parameterType="String" resultMap="roomMap">
+        SELECT * FROM T_ROOM WHERE R_NO=#{no}
+    </select>
+    <update id="updateRoomStatus" parameterType="Map">
+        UPDATE T_ROOM SET ${column}=#{value} WHERE R_ID=#{id}
+    </update>
+     <update id="updateRoom" parameterType="Map">
+        UPDATE T_ROOM SET ${column}=#{value} WHERE R_ID=#{id}
+    </update>
+    <delete id="deleteRoom" parameterType="Integer">
+	    DELETE FROM T_ROOM WHERE R_ID=#{id}
+	</delete>
+	<insert id="insertRoom" parameterType="cn.hulian.mEntity.Room">
+	    INSERT INTO T_ROOM(R_TYPE,R_NO,R_PAY) VALUES(#{type},#{no},#{pay})
+	</insert>
+</mapper>

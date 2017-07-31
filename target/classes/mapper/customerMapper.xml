@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.hulian.mDao.ICustomerDao">
+	<resultMap type="cn.hulian.mEntity.Customer" id="customerMap">
+		<id property="id" column="C_ID" javaType="java.lang.Integer"></id>
+		<result property="name" column="C_NAME" javaType="java.lang.String"></result>
+		<result property="tel" column="C_TEL" javaType="java.lang.String"></result>
+		<result property="credentialsno" column="C_CREDENTIALSID"
+			javaType="java.lang.String"></result>
+		<result property="roomno" column="C_ROOMNO" javaType="java.lang.String"></result>
+		<result property="arrive" column="C_ARRIVE" javaType="java.lang.String"></result>
+		<result property="leave" column="C_LEAVE" javaType="java.lang.String"></result>
+		<result property="deposit" column="C_DEPOSIT" javaType="java.lang.Double"></result>
+		<result property="pay" column="C_PAY" javaType="java.lang.Double"></result>
+		<result property="ps" column="C_PS" javaType="java.lang.String"></result>
+	</resultMap>
+	<insert id="insertCustomer" parameterType="cn.hulian.mEntity.Customer">
+		INSERT INTO
+		T_CUSTOMER(C_NAME,C_TEL,C_CREDENTIALSID,C_ROOMNO,C_ARRIVE,C_LEAVE,C_DEPOSIT,C_PAY,C_PS)
+		VALUES(#{name},#{tel},#{credentialsno},#{roomno},#{arrive},#{leave},#{deposit},#{pay},#{ps})
+	</insert>
+	<select id="queryAllCustomer" resultMap="customerMap">
+	    SELECT C_ID,C_NAME,C_TEL,C_CREDENTIALSID,C_ROOMNO FROM T_CUSTOMER
+	</select>
+	<update id="updateCustomer">
+	    UPDATE T_CUSTOMER SET ${column}=#{value} WHERE C_ID=#{id}
+	</update>
+	<delete id="deleteCustomer" parameterType="Integer">
+	    DELETE FROM T_CUSTOMER WHERE C_ID=#{id}
+	</delete>
+</mapper>

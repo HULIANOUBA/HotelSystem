@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.hulian.mDao.IReservationDao">
+	<resultMap type="cn.hulian.mEntity.Reservation" id="reservationMap">
+		<id property="id" column="R_ID" javaType="java.lang.Integer"></id>
+		<result property="type" column="R_TYPE" javaType="java.lang.String"></result>
+		<result property="arrive" column="R_ARRIVE" javaType="java.lang.String"></result>
+		<result property="leave" column="R_LEAVE" javaType="java.lang.String"></result>
+		<result property="status" column="R_STATUS" javaType="java.lang.String"></result>
+		<result property="name" column="R_NAME" javaType="java.lang.String"></result>
+		<result property="sex" column="R_SEX" javaType="java.lang.String"></result>
+		<result property="credentialsType" column="R_CREDENTIALSTYPE"
+			javaType="java.lang.String"></result>
+		<result property="credentialsNo" column="R_CREDENTIALSNO"
+			javaType="java.lang.String"></result>
+		<result property="tel" column="R_TEL" javaType="java.lang.String"></result>
+		<result property="email" column="R_EMAIL" javaType="java.lang.String"></result>
+		<result property="count" column="R_COUNT" javaType="java.lang.Integer"></result>
+		<result property="cost" column="R_COST" javaType="java.lang.Double"></result>
+		<result property="payType" column="R_PAYTYPE" javaType="java.lang.String"></result>
+		<result property="earnest" column="R_EARNEST" javaType="java.lang.Double"></result>
+		<result property="ps" column="R_PS" javaType="java.lang.String"></result>
+		</resultMap>
+	<insert id="insertReservation">
+		INSERT INTO
+		T_RESERVATION(R_TYPE,R_ARRIVE,R_LEAVE,R_STATUS,R_NAME,R_SEX,R_CREDENTIALSTYPE,R_CREDENTIALSNO,R_TEL,R_EMAIL,R_COUNT,R_COST,R_PAYTYPE,R_EARNEST,R_PS)
+		VALUES(#{type},#{arrive},#{leave},#{status},#{name},#{sex},#{credentialsType},#{credentialsNo},#{tel},#{email},#{count},#{cost},#{payType},#{earnest},#{ps})
+	</insert>
+	
+	<select id="queryReservation" resultMap="reservationMap">
+	    SELECT R_ID,R_STATUS,R_ARRIVE,R_LEAVE,R_COUNT,R_NAME,R_TEL,R_COST FROM T_RESERVATION
+	</select>
+	<update id="updateReservation" parameterType="Map" >
+	    UPDATE T_RESERVATION SET ${column}=#{value} WHERE R_ID=#{id}
+	</update>
+	<delete id="deleteReservation" parameterType="Integer">
+	    DELETE FROM T_RESERVATION WHERE R_ID=#{id}
+	</delete>
+</mapper>
