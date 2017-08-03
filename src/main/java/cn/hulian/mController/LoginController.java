@@ -6,8 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,12 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import cn.hulian.mDao.IUserDao;
 import cn.hulian.mEntity.User;
+import cn.hulian.mTool.MyACT;
 
 
 @Controller
 public class LoginController {
 
-	ApplicationContext ctx;
 	private User user;
 	ModelAndView view = null;  
 	@Autowired
@@ -32,14 +30,13 @@ public class LoginController {
 	public ModelAndView loginVerify(@RequestParam("username") String username,
 			@RequestParam("password") String password,HttpSession session) {
 		ModelAndView view = null;  
-		ctx=new ClassPathXmlApplicationContext("spring/ApplicationContext.xml");
-		IUserDao iUserDao=ctx.getBean(IUserDao.class);
+		IUserDao iUserDao=MyACT.getApplicationContext().getBean(IUserDao.class);
 		user=new User();
 	    user=iUserDao.getUserByName(username);
 	    if(user==null){
 	    	view = new ModelAndView(new RedirectView("login.jsp"));
-	    	session.setAttribute("msg", "ÓÃ»§Ãû´íÎó");
-	    	System.out.println("ÓÃ»§Ãû´íÎó");
+	    	session.setAttribute("msg", "ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+	    	System.out.println("ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 	    	return view;
 	    }else{
 	    if(password.equals(user.getPassword())){
@@ -48,8 +45,8 @@ public class LoginController {
 	    	/*view.addObject("username", user.getUsername());*/
 	    }else{
 	    	 view = new ModelAndView(new RedirectView("login.jsp"));  
-	    	 session.setAttribute("msg", "ÃÜÂë²»ÕýÈ·");  
-	    	 System.out.println("ÃÜÂë²»ÕýÈ·");
+	    	 session.setAttribute("msg", "ï¿½ï¿½ï¿½ë²»ï¿½ï¿½È·");  
+	    	 System.out.println("ï¿½ï¿½ï¿½ë²»ï¿½ï¿½È·");
 	    }
 	    }
 		return view;

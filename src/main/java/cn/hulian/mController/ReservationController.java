@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,13 +12,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.hulian.mDao.IReservationDao;
 import cn.hulian.mEntity.Reservation;
+import cn.hulian.mTool.MyACT;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 @Controller
 public class ReservationController {
 
-	ApplicationContext ctx;
+
 
 	@RequestMapping(value = "insertReservation")
 	@ResponseBody
@@ -28,8 +27,7 @@ public class ReservationController {
 		String str = "";
 		JSONObject mData = JSONObject.fromObject(rData);
 		JSONObject jObj = mData.getJSONObject("formData");
-		ctx = new ClassPathXmlApplicationContext("spring/ApplicationContext.xml");
-		IReservationDao iReservationDao = ctx.getBean(IReservationDao.class);
+		IReservationDao iReservationDao = MyACT.getApplicationContext().getBean(IReservationDao.class);
 		Reservation r = new Reservation(jObj.getString("reservation_type"), jObj.getString("reservation_time"),
 				jObj.getString("leave_time"), jObj.getString("reservation_status"), jObj.getString("name"),
 				jObj.getString("sex"), jObj.getString("credentials_type"), jObj.getString("credentials_no"),
@@ -49,8 +47,7 @@ public class ReservationController {
 	public String queryReservation() {
 
 		List<Reservation> list = new ArrayList<Reservation>();
-		ctx = new ClassPathXmlApplicationContext("spring/ApplicationContext.xml");
-		IReservationDao iReservationDao = ctx.getBean(IReservationDao.class);
+		IReservationDao iReservationDao = MyACT.getApplicationContext().getBean(IReservationDao.class);
 		list = iReservationDao.queryReservation();
 		return JSONArray.fromObject(list).toString();
 	}
@@ -59,8 +56,7 @@ public class ReservationController {
 	@ResponseBody
 	public String updateReservation(@RequestBody String data) {
 		String str = "";
-		ctx = new ClassPathXmlApplicationContext("spring/ApplicationContext.xml");
-		IReservationDao iReservationDao = ctx.getBean(IReservationDao.class);
+		IReservationDao iReservationDao = MyACT.getApplicationContext().getBean(IReservationDao.class);
 		JSONObject mData = JSONObject.fromObject(data);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", Integer.parseInt(mData.getString("id")));
@@ -80,8 +76,7 @@ public class ReservationController {
 	public String deleteReservation(@RequestBody String data) {
 		String str = "";
 		int ii = 0;
-		ctx = new ClassPathXmlApplicationContext("spring/ApplicationContext.xml");
-		IReservationDao iReservationDao = ctx.getBean(IReservationDao.class);
+		IReservationDao iReservationDao = MyACT.getApplicationContext().getBean(IReservationDao.class);
 		JSONObject mData = JSONObject.fromObject(data);
 		String boxStr = mData.getString("boxStr");
 		String[] ids = boxStr.split(",");

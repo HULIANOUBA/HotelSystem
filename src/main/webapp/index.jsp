@@ -163,10 +163,10 @@
 								<div id="check-in_table_div">
 									<table id='check-in_table'>
 										<tr class='form-group'>
-											<td><label>客户姓名</label><input  type="text" name="customer_name" required pattern="^([\u4e00-\u9fa5]+|([a-z]+\s?)+)$j" /></td>
-											<td><label>联系电话</label><input  type="tel" name="customer_phone" required pattern="^\d{11}$j" />
+											<td><label>客户姓名</label><input  type="text" name="customer_name" required  /></td>
+											<td><label>联系电话</label><input  type="tel" name="customer_phone" required pattern="^\d{11}$" />
 											</td>
-											<td><label>身份证&nbsp;&nbsp;&nbsp;</label><input class='form-control' type="text" name="customerID_no" required pattern="^[0-9]+(.[0-9]+)?$j" /></td>
+											<td><label>身份证&nbsp;&nbsp;&nbsp;</label><input type="text" name="customerID_no" required pattern="^[0-9]+(.[0-9]+)?$" /></td>
 										</tr>
 										<tr class='form-group'>
 											<td><label>入住房号</label><input  type="text" name="room_no" required /></td>
@@ -203,7 +203,7 @@
 								<label>当前</label><span id='currentPage'>1/1</span><span>每页<input
 								type="text" id='pageRow' value='2' />条
 							</span>
-								<a id='setPageRow' href='#'>设置</a> <label>数据总量</label> <span id='rowCount'>1</span>
+								<a id='setPageRow' href='#'>设置</a> <label>数据总量</label> <span id='rowCount'>0</span>
 								<a id="firstPage" href='#'>首页</a>
 								<a id='prePage' href='#'>上一页</a>
 								<a id='nextPage' href='#'>下一页</a>
@@ -233,7 +233,7 @@
 								<label>当前</label><span id='c_currentPage'>1/1</span><span>每页<input
 								type="text" id='c_pageRow' value='2' />条
 							</span>
-								<a id='c_setPageRow' href='#'>设置</a> <label>数据总量</label> <span id='c_rowCount'>1</span>
+								<a id='c_setPageRow' href='#'>设置</a> <label>数据总量</label> <span id='c_rowCount'>0</span>
 								<a id="c_firstPage" href='#'>首页</a>
 								<a id='c_prePage' href='#'>上一页</a>
 								<a id='c_nextPage' href='#'>下一页</a>
@@ -258,7 +258,7 @@
 								<label>当前</label><span id='r_currentPage'>1/1</span><span>每页<input
 								type="text" id='r_pageRow' value='2' />条
 							</span>
-								<a id='r_setPageRow' href='#'>设置</a> <label>数据总量</label> <span id='r_rowCount'>1</span>
+								<a id='r_setPageRow' href='#'>设置</a> <label>数据总量</label> <span id='r_rowCount'>0</span>
 								<a id="r_firstPage" href='#'>首页</a>
 								<a id='r_prePage' href='#'>上一页</a>
 								<a id='r_nextPage' href='#'>下一页</a>

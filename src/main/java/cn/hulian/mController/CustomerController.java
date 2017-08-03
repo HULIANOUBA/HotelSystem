@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,13 +11,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.hulian.mDao.ICustomerDao;
 import cn.hulian.mEntity.Customer;
+import cn.hulian.mTool.MyACT;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 @Controller
 public class CustomerController {
-
-	ApplicationContext ctx;
 
 	@RequestMapping(value = "insertCustomer")
 	@ResponseBody
@@ -28,8 +24,7 @@ public class CustomerController {
 		String str = "";
 		
 		int i = 0;
-		ctx = new ClassPathXmlApplicationContext("spring/ApplicationContext.xml");
-		ICustomerDao iCustomerDao = ctx.getBean(ICustomerDao.class);
+		ICustomerDao iCustomerDao=MyACT.getApplicationContext().getBean(ICustomerDao.class);
 		JSONObject data = JSONObject.fromObject(cData);
 		JSONObject mData=data.getJSONObject("formData");
 		Customer c = new Customer(mData.getString("customer_name"), mData.getString("customer_phone"),
@@ -48,8 +43,7 @@ public class CustomerController {
 	@RequestMapping(value = "queryAllCustomer")
 	@ResponseBody
 	public String queryAllCustomer(){
-		ctx = new ClassPathXmlApplicationContext("spring/ApplicationContext.xml");
-		ICustomerDao iCustomerDao = ctx.getBean(ICustomerDao.class);
+		ICustomerDao iCustomerDao = MyACT.getApplicationContext().getBean(ICustomerDao.class);
 		List<Customer> list=new ArrayList<Customer>();
 		list=iCustomerDao.queryAllCustomer();
 		return JSONArray.fromObject(list).toString();
@@ -58,8 +52,7 @@ public class CustomerController {
 	@ResponseBody
 	public String updateCustomer(@RequestBody String data) {
 		String str = "";
-		ctx = new ClassPathXmlApplicationContext("spring/ApplicationContext.xml");
-		ICustomerDao iCustomerDao = ctx.getBean(ICustomerDao.class);
+		ICustomerDao iCustomerDao = MyACT.getApplicationContext().getBean(ICustomerDao.class);
 		JSONObject mData = JSONObject.fromObject(data);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", Integer.parseInt(mData.getString("id")));
@@ -78,8 +71,7 @@ public class CustomerController {
 	public String deleteCustomer(@RequestBody String data) {
 		String str = "";
 		int ii = 0;
-		ctx = new ClassPathXmlApplicationContext("spring/ApplicationContext.xml");
-		ICustomerDao iCustomerDao = ctx.getBean(ICustomerDao.class);
+		ICustomerDao iCustomerDao = MyACT.getApplicationContext().getBean(ICustomerDao.class);
 		JSONObject mData = JSONObject.fromObject(data);
 		String boxStr = mData.getString("boxStr");
 		String[] ids = boxStr.split(",");

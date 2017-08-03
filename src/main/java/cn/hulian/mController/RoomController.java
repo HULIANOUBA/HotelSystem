@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,19 +12,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.hulian.mDao.IRoomDao;
 import cn.hulian.mEntity.Room;
+import cn.hulian.mTool.MyACT;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 @Controller
 public class RoomController {
 
-	ApplicationContext ctx;
 
 	@RequestMapping(value = "queryAllRoomByStatus")
 	@ResponseBody
 	public String queryAllRoomByStatus() {
-		ctx = new ClassPathXmlApplicationContext("spring/ApplicationContext.xml");
-		IRoomDao iRoomDao = ctx.getBean(IRoomDao.class);
+		IRoomDao iRoomDao =MyACT.getApplicationContext().getBean(IRoomDao.class);
 		List<Room> list = new ArrayList<Room>();
 		list = iRoomDao.queryAllRoomByStatus();
 		return JSONArray.fromObject(list).toString();
@@ -37,8 +33,7 @@ public class RoomController {
 	@ResponseBody
 	public String updateRoomStatus(@RequestBody String data) {
 		String str = "";
-		ctx = new ClassPathXmlApplicationContext("spring/ApplicationContext.xml");
-		IRoomDao iRoomDao = ctx.getBean(IRoomDao.class);
+		IRoomDao iRoomDao =MyACT.getApplicationContext().getBean(IRoomDao.class);
 		JSONObject mData = JSONObject.fromObject(data);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", Integer.parseInt(mData.getString("id")));
@@ -56,8 +51,7 @@ public class RoomController {
 	@RequestMapping(value = "queryAllRoom")
 	@ResponseBody
 	public String queryAllRoom() {
-		ctx = new ClassPathXmlApplicationContext("spring/ApplicationContext.xml");
-		IRoomDao iRoomDao = ctx.getBean(IRoomDao.class);
+		IRoomDao iRoomDao =MyACT.getApplicationContext().getBean(IRoomDao.class);
 		List<Room> list = new ArrayList<Room>();
 		list = iRoomDao.queryAllRoom();
 		return JSONArray.fromObject(list).toString();
@@ -67,8 +61,7 @@ public class RoomController {
 	@ResponseBody
 	public String updateRoom(@RequestBody String data) {
 		String str = "";
-		ctx = new ClassPathXmlApplicationContext("spring/ApplicationContext.xml");
-		IRoomDao iRoomDao = ctx.getBean(IRoomDao.class);
+		IRoomDao iRoomDao =MyACT.getApplicationContext().getBean(IRoomDao.class);
 		JSONObject mData = JSONObject.fromObject(data);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", Integer.parseInt(mData.getString("id")));
@@ -88,8 +81,7 @@ public class RoomController {
 	public String deleteRoom(@RequestBody String data) {
 		String str = "";
 		int ii = 0;
-		ctx = new ClassPathXmlApplicationContext("spring/ApplicationContext.xml");
-		IRoomDao iRoomDao = ctx.getBean(IRoomDao.class);
+		IRoomDao iRoomDao =MyACT.getApplicationContext().getBean(IRoomDao.class);
 		JSONObject mData = JSONObject.fromObject(data);
 		String boxStr = mData.getString("boxStr");
 		String[] ids = boxStr.split(",");
@@ -109,8 +101,7 @@ public class RoomController {
 	public String insertRoom(@RequestParam("r_type")String r_type,@RequestParam("r_no")String r_no,@RequestParam("r_pay")String r_pay){
 		String str="";
 		int i=0;
-		ctx = new ClassPathXmlApplicationContext("spring/ApplicationContext.xml");
-		IRoomDao iRoomDao = ctx.getBean(IRoomDao.class);
+		IRoomDao iRoomDao =MyACT.getApplicationContext().getBean(IRoomDao.class);
 		Room r=new Room();
 		r=iRoomDao.queryRoomByNo(r_no);
 		if(r==null){
